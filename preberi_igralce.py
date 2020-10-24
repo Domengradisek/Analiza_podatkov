@@ -13,7 +13,6 @@ vzorec = (
     r'(?P<kakovost>\d{2})' # kakovost
     r'</span><span class="badge badge-dark rating .*?">'
     r'(?P<potencial>\d{2})' # potencial
-    
 )
 
 stevec = 0
