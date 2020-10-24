@@ -24,12 +24,9 @@ for stran in range(STEVILO_STRANI):
     url = f'https://www.fifaindex.com/players/{count}/?gender=male&order=desc'
     datoteka = f'najboljsi_igralci/od_{30 * stran + 1}_do_{30 * stran + 30}.html'
     orodja.shrani_spletno_stran(url, datoteka)
-    
-    with open(datoteka, encoding='utf-8') as f:
-        vsebina = f.read()
-
-        for zadetek in re.finditer(vzorec, vsebina):
-            #print(zadetek.groupdict())
-            najdeni_igralci += 1
+    vsebina = orodja.vsebina_datoteke(datoteka)
+    for zadetek in re.finditer(vzorec, vsebina):
+        #print(zadetek.groupdict())
+        najdeni_igralci += 1
 
 print(najdeni_igralci)
