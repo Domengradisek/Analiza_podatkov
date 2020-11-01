@@ -10,7 +10,7 @@ vzorec_bloka = re.compile(
 vzorec_igralca = re.compile(
     r'<tr data-playerid="(?P<id>\d+?)">' # zajamemo ID igralca
     r'<td><figure class="player"><a href=".*?" '
-    r'title="(?P<ime_in_priiimek>.+?) FIFA 21" class="link-player">' # zajamemo ime igralca
+    r'title="(?P<ime_in_priimek>.+?) FIFA 21" class="link-player">' # zajamemo ime igralca
     r'<img src=.*?</a></td>'
     r'<td data-title="Nationality"><a href="/players/\?nationality=\d.*?" title="(?P<državljanstvo>.+?)" class="link-nation">'# zajamemo državo
     r'<img src=".*? class="badge badge-dark rating .*?">'
@@ -42,9 +42,6 @@ def izloci_igralne_polozaje(niz):
     for igralni_polozaj in vzorec_igralnega_polozaja.finditer(niz):
         x = igralni_polozaj.groupdict()['polozaj']
         igralni_polozaji.append(x)
-        #igralni_polozaji.append({
-        #    'polozaj': igralni_polozaj.groupdict()['polozaj']
-        #})
     return igralni_polozaji
 
 
@@ -73,9 +70,30 @@ def igralci_na_strani(st_strani):
         yield izloci_podatke_igralca(blok.group(0))
 
 
+def izloci_gnezdene_podatke(igralci):
+    polozaj = []
+
+    for igralec in igralci:
+        for eden_polozaj in igralec.pop('polozaj'):
+            polozaj.append({'igralec': igralec['id'], 'eden_polozaj': eden_polozaj})
+    
+    polozaj.sort(key=lambda eden_polozaj: (eden_polozaj['igralec'], eden_polozaj['eden_polozaj']))
+
+    return polozaj
+
+
 igralci = []
 for st_strani in range(1,16):
     for igralec in igralci_na_strani(st_strani):
         igralci.append(igralec)
 igralci.sort(key=lambda igralec: igralec['id'])
 orodja.zapisi_json(igralci, 'obdelani-podatki/igralci.json')
+polozaj = izloci_gnezdene_podatke(igralci)
+orodja.zapisi_csv(
+    igralci,
+    ['id', 'ime_in_priimek', 'državljanstvo', 'ocena', 'potencial', 'starost', 'iskanja', 'klub'], 'obdelani-podatki/igralci.csv'
+)
+orodja.zapisi_csv(
+    polozaj,
+    ['igralec', 'eden_polozaj'], 'obdelani-podatki/polozaji.csv'
+)
