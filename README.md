@@ -5,13 +5,14 @@ V tem repozitoriju bom primerjal najboljših 5100 nogometnih igralcev v videoigr
 Za vsakega igralca bom zajel:
 * ime in priimek
 * oceno
+* potencial
 * državljanstvo
 * starost
-* višino in težo
 * igralni položaj
-* vrednost in plačo.
+* klub
+* število ogledov igralca v zadnjih 24 urah.
 
 Delovne hipoteze:
-* Ali obstaja povezava med igralnim položajem in vrednostjo?
-* Ali imajo igralci z boljšo oceno višjo plačo?
-* Je kakšna povezava med višino oz. težo in igralnim položajem?
+* Ali obstaja povezava med igralnim položajem in številom ogledov?
+* Ali imajo mlajši igralci večjo razliko med oceno in potencialom?
+* Je kakšna povezava med državljanstvom in klubom?
