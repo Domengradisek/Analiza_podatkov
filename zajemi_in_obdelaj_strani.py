@@ -33,14 +33,14 @@ vzorec_igralnih_polozajev = re.compile(
 )
 
 vzorec_igralnega_polozaja = re.compile(
-    r'<a href="/players/.*? title="(?P<polozaj>.+?)" class="link-position">.*?',
+    r'<a href="/players/.*? title="(?P<polozaj1>.+?)" class="link-position">.*?',
     flags=re.DOTALL
 )
 
 def izloci_igralne_polozaje(niz):
     igralni_polozaji = []
     for igralni_polozaj in vzorec_igralnega_polozaja.finditer(niz):
-        x = igralni_polozaj.groupdict()['polozaj']
+        x = igralni_polozaj.groupdict()['polozaj1']
         igralni_polozaji.append(x)
     return igralni_polozaji
 
@@ -55,7 +55,7 @@ def izloci_podatke_igralca(blok):
     #zdruzimo polozaje
     igralni_polozaji = vzorec_igralnih_polozajev.search(blok)
     if igralni_polozaji:
-        igralec['polozaj'] = izloci_igralne_polozaje(igralni_polozaji['igralni_polozaji'])
+        igralec['polozaj1'] = izloci_igralne_polozaje(igralni_polozaji['igralni_polozaji'])
     return igralec
 
 
@@ -71,29 +71,29 @@ def igralci_na_strani(st_strani):
 
 
 def izloci_gnezdene_podatke(igralci):
-    polozaj = []
+    polozaj1 = []
 
     for igralec in igralci:
-        for eden_polozaj in igralec.pop('polozaj'):
-            polozaj.append({'igralec': igralec['id'], 'eden_polozaj': eden_polozaj})
+        for polozaj in igralec.pop('polozaj1'):
+            polozaj1.append({'igralec': igralec['id'], 'polozaj': polozaj})
     
-    polozaj.sort(key=lambda eden_polozaj: (eden_polozaj['igralec'], eden_polozaj['eden_polozaj']))
+    polozaj1.sort(key=lambda polozaj: (polozaj['igralec'], polozaj['polozaj']))
 
-    return polozaj
+    return polozaj1
 
 
 igralci = []
-for st_strani in range(1,16):
+for st_strani in range(1,171):
     for igralec in igralci_na_strani(st_strani):
         igralci.append(igralec)
 igralci.sort(key=lambda igralec: igralec['id'])
 orodja.zapisi_json(igralci, 'obdelani-podatki/igralci.json')
-polozaj = izloci_gnezdene_podatke(igralci)
+polozaj1 = izloci_gnezdene_podatke(igralci)
 orodja.zapisi_csv(
     igralci,
     ['id', 'ime_in_priimek', 'državljanstvo', 'ocena', 'potencial', 'starost', 'iskanja', 'klub'], 'obdelani-podatki/igralci.csv'
 )
 orodja.zapisi_csv(
-    polozaj,
-    ['igralec', 'eden_polozaj'], 'obdelani-podatki/polozaji.csv'
+    polozaj1,
+    ['igralec', 'polozaj'], 'obdelani-podatki/polozaji.csv'
 )
