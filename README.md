@@ -16,3 +16,7 @@ Delovne hipoteze:
 * Ali obstaja povezava med igralnim položajem in številom ogledov?
 * Ali imajo mlajši igralci večjo razliko med oceno in potencialom?
 * Je kakšna povezava med državljanstvom in klubom?
+
+V datoteki igralci.csv je za vsakega nogometaša zabeležen id, ime in priimek, državljanstvo, ocena, potencial, starost, število iskanj v zadnjem dnevu in klub igranja. V datoteki polozaji.csv pa so za vsakega igralca zabelezeni igralni polozaji.
+
+V repozitorij sem dodal tudi datoteko igralci1.html, kot primer strani, s katere sem zajel podatke.
