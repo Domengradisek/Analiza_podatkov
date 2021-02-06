@@ -13,9 +13,9 @@ Za vsakega igralca bom zajel:
 * število ogledov igralca v zadnjih 24 urah.
 
 Delovne hipoteze:
-* Ali obstaja povezava med igralnim položajem in številom ogledov?
-* Ali imajo mlajši igralci večjo razliko med oceno in potencialom?
-* Je kakšna povezava med državljanstvom in klubom?
+* najbolje ocenjeni so igralci okoli tridesetega lta starosti,
+* največ ogledov imajo igralci znanih evropskih klubov,
+* več potenciala od ombrambnih nogometašev in golmanov imajo napadalci.
 
 V datoteki igralci.csv je za vsakega nogometaša zabeležen id, ime in priimek, državljanstvo, ocena, potencial, starost, število iskanj v zadnjem dnevu in klub igranja. V datoteki polozaji.csv pa so za vsakega igralca zabelezeni igralni polozaji.
 
