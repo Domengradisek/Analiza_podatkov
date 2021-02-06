@@ -13,7 +13,7 @@ Za vsakega igralca bom zajel:
 * število ogledov igralca v zadnjih 24 urah.
 
 Delovne hipoteze:
-* najbolje ocenjeni so igralci okoli tridesetega lta starosti,
+* najbolje ocenjeni so igralci okoli tridesetega leta starosti,
 * največ ogledov imajo igralci znanih evropskih klubov,
 * več potenciala od ombrambnih nogometašev in golmanov imajo napadalci.
 
